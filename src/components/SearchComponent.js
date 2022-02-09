@@ -24,7 +24,7 @@ const SearchComponent = props => {
 
 const styles = StyleSheet.create({
   container: {
-    width: Dimensions.get('screen').width,
+    width: '100%',
     backgroundColor: 'white',
     alignItems: 'center',
     paddingVertical: 10,
