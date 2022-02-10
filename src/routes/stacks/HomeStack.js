@@ -1,6 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {TouchableOpacity, View, Text} from 'react-native';
+import {TouchableOpacity, View, Text, StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {DrawerActions} from '@react-navigation/native';
 import HomeScreen from '../../screens/HomeScreen';
@@ -28,33 +28,15 @@ const HomeStack = ({navigation, route}) => {
         options={{
           title: null,
           headerLeft: () => (
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+            <View style={Styles.headerLeftContainer}>
               <TouchableOpacity
                 onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
                 style={{marginLeft: 10}}>
                 <Ionicons name="menu-outline" size={30} color="#E21A70" />
               </TouchableOpacity>
               <View style={{paddingLeft: 15}}>
-                <Text
-                  style={{
-                    fontSize: 16,
-                    fontWeight: '700',
-                    color: '#E21A70',
-                    fontFamily: 'Muli',
-                  }}>
-                  Current Location
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 14,
-                    color: '#333',
-                    fontFamily: 'Muli',
-                  }}>
+                <Text style={Styles.currentLocation}>Current Location</Text>
+                <Text style={Styles.locationUser}>
                   Cubator 1 Sunrise Avenue
                 </Text>
               </View>
@@ -83,3 +65,21 @@ const HomeStack = ({navigation, route}) => {
 };
 
 export default HomeStack;
+const Styles = StyleSheet.create({
+  headerLeftContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  currentLocation: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#E21A70',
+    fontFamily: 'Muli',
+  },
+  locationUser: {
+    fontSize: 14,
+    color: '#333',
+    fontFamily: 'Muli',
+  },
+});

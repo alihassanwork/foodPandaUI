@@ -1,3 +1,3 @@
 import MovieCard from './MovieCard';
-
-export {MovieCard};
+import FavouriteCard from './FavouriteCard';
+export {MovieCard, FavouriteCard};

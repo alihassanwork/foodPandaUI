@@ -44,7 +44,11 @@ const HomeScreen = ({navigation}) => {
       style={styles.scrollContainer}
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}>
-      <StatusBar backgroundColor="transparent" translucent={true} />
+      <StatusBar
+        hidden={false}
+        barStyle="light-content"
+        backgroundColor="rgba(0, 0, 0, 0.9)"
+      />
       <SearchComponent />
       <ImageBackground
         style={styles.greetingContainer}

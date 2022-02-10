@@ -15,6 +15,7 @@ const BottomTabNavigation = () => {
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarShowLabel: false,
+        tabBarHideOnKeyboard: true,
         headerShown: false,
         tabBarStyle: {
           backgroundColor: 'rgba(255, 255, 255, 1)',
@@ -24,12 +25,12 @@ const BottomTabNavigation = () => {
           switch (route.name) {
             case 'HomeStack':
               return (
-                <View
-                  style={[
-                    styles.iconStyle,
-                    focused ? styles.iconFocusedStyle : null,
-                  ]}>
-                  <Ionicons name="ios-home-sharp" size={30} color="#E21A70" />
+                <View style={styles.iconStyle}>
+                  <Ionicons
+                    name="ios-home-sharp"
+                    size={30}
+                    color={focused ? '#E21A70' : 'rgba(155, 155, 155, 1)'}
+                  />
 
                   <Text
                     style={[
@@ -44,15 +45,11 @@ const BottomTabNavigation = () => {
               );
             case 'Profile':
               return (
-                <View
-                  style={[
-                    styles.iconStyle,
-                    focused ? styles.iconFocusedStyle : null,
-                  ]}>
+                <View style={styles.iconStyle}>
                   <MaterialIcons
                     name="movie-filter"
                     size={30}
-                    color="#E21A70"
+                    color={focused ? '#E21A70' : 'rgba(155, 155, 155, 1)'}
                   />
 
                   <Text
@@ -68,12 +65,12 @@ const BottomTabNavigation = () => {
               );
             case 'Favourites':
               return (
-                <View
-                  style={[
-                    styles.iconStyle,
-                    focused ? styles.iconFocusedStyle : null,
-                  ]}>
-                  <MaterialIcons color="#E21A70" size={32} name="favorite" />
+                <View style={styles.iconStyle}>
+                  <MaterialIcons
+                    color={focused ? '#E21A70' : 'rgba(155, 155, 155, 1)'}
+                    size={32}
+                    name="favorite"
+                  />
                   <Text
                     style={[
                       styles.labelText,
@@ -87,15 +84,11 @@ const BottomTabNavigation = () => {
               );
             case 'Setting':
               return (
-                <View
-                  style={[
-                    styles.iconStyle,
-                    focused ? styles.iconFocusedStyle : null,
-                  ]}>
+                <View style={styles.iconStyle}>
                   <Ionicons
                     name="ios-settings-sharp"
                     size={30}
-                    color="#E21A70"
+                    color={focused ? '#E21A70' : 'rgba(155, 155, 155, 1)'}
                   />
 
                   <Text

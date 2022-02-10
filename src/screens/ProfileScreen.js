@@ -54,7 +54,7 @@ const ProfileScreen = () => {
                     resizeMode="cover"
                     style={styles.posterStyle}
                   />
-                  <View style={{flex: 1, marginLeft: 12}}>
+                  <View style={styles.voteContainer}>
                     <View>
                       <Text style={styles.movieTitle}>{item.title}</Text>
                     </View>
@@ -93,7 +93,7 @@ const ProfileScreen = () => {
 export default ProfileScreen;
 
 const styles = StyleSheet.create({
-  container: {flex: 1, marginTop: 44, paddingHorizontal: 20},
+  container: {flex: 1, paddingHorizontal: 20},
   textHeader: {fontSize: 22},
   flatListContainer: {flex: 1, marginTop: 12},
   favoriteBtn: {
@@ -119,4 +119,5 @@ const styles = StyleSheet.create({
   },
   movieContainer: {flexDirection: 'row', flex: 1},
   posterStyle: {width: 100, height: 150, borderRadius: 10},
+  voteContainer: {flex: 1, marginLeft: 12},
 });
