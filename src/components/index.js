@@ -1,3 +1,5 @@
 import MovieCard from './MovieCard';
 import FavouriteCard from './FavouriteCard';
-export {MovieCard, FavouriteCard};
+import SearchComponent from './SearchComponent';
+import CustomDrawer from './CustomDrawer';
+export {MovieCard, FavouriteCard, SearchComponent, CustomDrawer};

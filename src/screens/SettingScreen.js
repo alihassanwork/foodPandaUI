@@ -1,11 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  ScrollView,
-  StatusBar,
-} from 'react-native';
+import {StyleSheet, Text, View, Button} from 'react-native';
 import React, {useState} from 'react';
 
 const SettingScreen = () => {

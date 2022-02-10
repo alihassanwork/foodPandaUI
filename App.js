@@ -1,11 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import HomeScreen from "./src/screens/HomeScreen";
-import DrawerNavigation from "./src/routes/DrawerNavigation";
-import { NavigationContainer } from "@react-navigation/native";
-import { Provider } from "react-redux";
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import DrawerNavigation from './src/routes/DrawerNavigation';
+import {NavigationContainer} from '@react-navigation/native';
+import {Provider} from 'react-redux';
 
-import { store } from "./redux/store";
+import {store} from './redux/store';
 const App = () => {
   return (
     <Provider store={store}>

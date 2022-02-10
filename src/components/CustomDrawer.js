@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {DrawerContentScrollView} from '@react-navigation/drawer';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
 const {height} = Dimensions.get('screen');
 const CustomDrawer = props => {

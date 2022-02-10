@@ -6,9 +6,9 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {getMovies, addFavorite, removeFavorite} from '../../redux/actions';
+import {addFavorite, removeFavorite} from '../../redux/actions';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const ProfileScreen = () => {

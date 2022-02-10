@@ -11,15 +11,15 @@ import {
 } from 'react-native';
 
 import React, {useEffect} from 'react';
-import SearchComponent from '../components/SearchComponent';
+import {SearchComponent} from '../../components';
 import LinearGradient from 'react-native-linear-gradient';
-import {data} from '../../data';
+import {data} from '../../../data';
 import {useSelector, useDispatch} from 'react-redux';
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
 ]);
-import {MovieCard} from '../components';
-import {getMovies} from '../../redux/actions';
+import {MovieCard} from '../../components';
+import {getMovies} from '../../../redux/actions';
 const HomeScreen = ({navigation}) => {
   const {movies} = useSelector(state => state.moviesReducer);
   const dispatch = useDispatch();
@@ -44,15 +44,11 @@ const HomeScreen = ({navigation}) => {
       style={styles.scrollContainer}
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}>
-      <StatusBar
-        hidden={false}
-        barStyle="light-content"
-        backgroundColor="rgba(0, 0, 0, 0.9)"
-      />
+      <StatusBar hidden={false} barStyle="light-content" />
       <SearchComponent />
       <ImageBackground
         style={styles.greetingContainer}
-        source={require('../../assets/images/greetingbg.png')}
+        source={require('../../../assets/images/greetingbg.png')}
         resizeMode="cover">
         <Text style={styles.h1}>Good evening,</Text>
         <View style={{width: '60%'}}>
@@ -64,7 +60,7 @@ const HomeScreen = ({navigation}) => {
       <View style={styles.containerWrapper}>
         <ImageBackground
           style={styles.devliveryContainer}
-          source={require('../../assets/images/delivery.png')}
+          source={require('../../../assets/images/delivery.png')}
           resizeMode="contain">
           <LinearGradient
             colors={['transparent', 'rgba(255,255,255,0.3)']}
@@ -83,7 +79,7 @@ const HomeScreen = ({navigation}) => {
         ]}>
         <View style={styles.martContainer}>
           <ImageBackground
-            source={require('../../assets/images/delivery.png')}
+            source={require('../../../assets/images/delivery.png')}
             resizeMode="contain"
             style={styles.containerbg}>
             <Text style={[styles.h1, {color: 'black'}]}>Food delivery</Text>
@@ -95,7 +91,7 @@ const HomeScreen = ({navigation}) => {
         <View style={styles.shopAndPickWrapper}>
           <View style={styles.pickupContainer}>
             <ImageBackground
-              source={require('../../assets/images/delivery.png')}
+              source={require('../../../assets/images/delivery.png')}
               resizeMode="contain"
               style={styles.containerbg}>
               <LinearGradient
@@ -110,7 +106,7 @@ const HomeScreen = ({navigation}) => {
           </View>
           <View style={styles.shopContainer}>
             <ImageBackground
-              source={require('../../assets/images/delivery.png')}
+              source={require('../../../assets/images/delivery.png')}
               resizeMode="contain"
               style={styles.containerbg}>
               <LinearGradient

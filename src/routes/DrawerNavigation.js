@@ -1,10 +1,6 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import HomeScreen from '../screens/HomeScreen';
-import CustomDrawer from '../components/CustomDrawer';
-import {TouchableOpacity, Text, View} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import HomeStack from './stacks/HomeStack';
+import {CustomDrawer} from '../components';
 const Drawer = createDrawerNavigator();
 import BottomTabNavigation from './BottomTabNavigation';
 const DrawerNavigation = ({navigation}) => {

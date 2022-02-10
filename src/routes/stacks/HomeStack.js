@@ -3,8 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {TouchableOpacity, View, Text, StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {DrawerActions} from '@react-navigation/native';
-import HomeScreen from '../../screens/HomeScreen';
-import {MovieDetail} from '../../screens/Home';
+import {MovieDetail, HomeScreen} from '../../screens/Home';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 const Stack = createNativeStackNavigator();
 const HomeStack = ({navigation, route}) => {
