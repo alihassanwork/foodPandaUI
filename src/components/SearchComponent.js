@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, TextInput, Dimensions} from 'react-native';
+import {View, StyleSheet, TextInput} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 const SearchComponent = props => {
   return (

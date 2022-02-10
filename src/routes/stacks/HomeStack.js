@@ -4,9 +4,19 @@ import {TouchableOpacity, View, Text} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {DrawerActions} from '@react-navigation/native';
 import HomeScreen from '../../screens/HomeScreen';
-
+import {MovieDetail} from '../../screens/Home';
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 const Stack = createNativeStackNavigator();
-const HomeStack = ({navigation}) => {
+const HomeStack = ({navigation, route}) => {
+  const tabHiddenRoutes = ['MovieDetail'];
+  React.useLayoutEffect(() => {
+    if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))) {
+      navigation.setOptions({tabBarStyle: {display: 'none'}});
+    } else {
+      navigation.setOptions({tabBarStyle: {display: 'flex'}});
+    }
+  }, [navigation, route]);
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -62,6 +72,11 @@ const HomeStack = ({navigation}) => {
             </TouchableOpacity>
           ),
         }}
+      />
+      <Stack.Screen
+        name="MovieDetail"
+        component={MovieDetail}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );

@@ -10,15 +10,24 @@ import {
   FlatList,
 } from 'react-native';
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import SearchComponent from '../components/SearchComponent';
 import LinearGradient from 'react-native-linear-gradient';
 import {data} from '../../data';
-
+import {useSelector, useDispatch} from 'react-redux';
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
 ]);
-const HomeScreen = () => {
+import {MovieCard} from '../components';
+import {getMovies} from '../../redux/actions';
+const HomeScreen = ({navigation}) => {
+  const {movies} = useSelector(state => state.moviesReducer);
+  const dispatch = useDispatch();
+  const fetchMovies = () => dispatch(getMovies());
+  useEffect(() => {
+    fetchMovies();
+  }, []);
+  // render Itme Daily deals
   const renderItem = ({index, item}) => {
     return (
       <View style={styles.dealsContainer}>
@@ -29,6 +38,7 @@ const HomeScreen = () => {
       </View>
     );
   };
+
   return (
     <ScrollView
       style={styles.scrollContainer}
@@ -111,7 +121,21 @@ const HomeScreen = () => {
           </View>
         </View>
       </View>
-      <Text style={[styles.h1, , styles.dealsText]}>Your daily deals</Text>
+      <Text style={[styles.h1, {paddingLeft: 10}]}>CINEPAX</Text>
+      <View style={{paddingHorizontal: 10}}>
+        <FlatList
+          horizontal
+          data={movies}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({item}) => (
+            <MovieCard item={item} navigation={navigation} />
+          )}
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
+      <Text style={[styles.h1, {paddingLeft: 10, marginVertical: 5}]}>
+        YOUR DAILY DEALS
+      </Text>
       <View style={styles.footerContainer}>
         <FlatList
           data={data}

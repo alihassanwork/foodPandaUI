@@ -10,7 +10,7 @@ const API_URL = 'https://api.themoviedb.org/3/movie/popular';
 const API_KEY = 'bb925e230868e5ea561be5d9be231edb';
 const PARAMS = 'page=1';
 const BASE_URL = `${API_URL}?api_key=${API_KEY}&${PARAMS}`;
-
+// fetch movies return dispatch function
 export const getMovies = () => {
   try {
     return async dispatch => {
@@ -31,6 +31,7 @@ export const getMovies = () => {
   }
 };
 
+// add favourite movie
 export const addFavorite = movie => dispatch => {
   dispatch({
     type: ADD_FAVORITE_ITEM,
@@ -38,6 +39,7 @@ export const addFavorite = movie => dispatch => {
   });
 };
 
+// remove favorite movie
 export const removeFavorite = movie => dispatch => {
   dispatch({
     type: REMOVE_FAVORITE_ITEM,

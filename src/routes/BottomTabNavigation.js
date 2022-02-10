@@ -4,8 +4,12 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeStack from './stacks/HomeStack';
 import SettingScreen from '../screens/SettingScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-const Tab = createBottomTabNavigator();
+import Favourites from '../screens/Favourites';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
+const Tab = createBottomTabNavigator();
+
 const BottomTabNavigation = () => {
   return (
     <Tab.Navigator
@@ -45,8 +49,8 @@ const BottomTabNavigation = () => {
                     styles.iconStyle,
                     focused ? styles.iconFocusedStyle : null,
                   ]}>
-                  <Ionicons
-                    name="ios-person-circle-sharp"
+                  <MaterialIcons
+                    name="movie-filter"
                     size={30}
                     color="#E21A70"
                   />
@@ -58,19 +62,18 @@ const BottomTabNavigation = () => {
                         color: focused ? '#E21A70' : 'rgba(155, 155, 155, 1)',
                       },
                     ]}>
-                    Profile
+                    Movies
                   </Text>
                 </View>
               );
-            case 'Progress':
+            case 'Favourites':
               return (
                 <View
                   style={[
                     styles.iconStyle,
                     focused ? styles.iconFocusedStyle : null,
                   ]}>
-                  <Ionicons name="menu-outline" size={30} color="#E21A70" />
-
+                  <MaterialIcons color="#E21A70" size={32} name="favorite" />
                   <Text
                     style={[
                       styles.labelText,
@@ -78,7 +81,7 @@ const BottomTabNavigation = () => {
                         color: focused ? '#E21A70' : 'rgba(155, 155, 155, 1)',
                       },
                     ]}>
-                    Progress
+                    Favourites
                   </Text>
                 </View>
               );
@@ -113,6 +116,7 @@ const BottomTabNavigation = () => {
       })}>
       <Tab.Screen name="HomeStack" component={HomeStack} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Favourites" component={Favourites} />
       <Tab.Screen name="Setting" component={SettingScreen} />
     </Tab.Navigator>
   );
@@ -136,7 +140,7 @@ const styles = StyleSheet.create({
     shadowColor: 'rgba(68, 189, 232, 0.3)',
   },
   labelText: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: '400',
     lineHeight: 19,
   },
