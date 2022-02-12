@@ -6,7 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {HooksTest} from '../components';
 import {useFetch} from '../hooks';
 const SettingScreen = () => {
@@ -18,22 +18,23 @@ const SettingScreen = () => {
   const [fetchCounter, setFetchCounter] = useState(0);
   // useEffect hook
   useEffect(() => {
-    //mounting phase
+    //mounting phase  componentDidMount
     console.log('render');
 
     //cleanup function return function inside useEffect function logic in cleanup function
-
     return () => {
       //unmounting phase
       console.log('unmount');
     };
-    //[] is dependency array
+    //[] is dependency array componentDidUpdate(if we pass value in array)
   }, [email]);
 
   //custom hook to fetch url data
   const {data, loading} = useFetch(
     `http://numbersapi.com/${fetchCounter}/trivia`,
   );
+  // useRef Hook reference
+  const inputRef = useRef();
   return (
     <View style={styles.container}>
       <View style={styles.counterContainer}>
@@ -52,6 +53,7 @@ const SettingScreen = () => {
       <View style={styles.effectContainer}>
         <Text style={styles.heading}>Email</Text>
         <TextInput
+          ref={inputRef}
           style={styles.input}
           placeholder="Enter email address"
           placeholderTextColor={'#333'}
@@ -61,8 +63,13 @@ const SettingScreen = () => {
           autoCorrect={false}
         />
         <Text style={styles.heading}>Your email: {email}</Text>
-
+        <TouchableOpacity
+          style={styles.toggle}
+          onPress={() => inputRef.current.focus()}>
+          <Text style={styles.heading}>Focus</Text>
+        </TouchableOpacity>
         <Text style={styles.heading}>Mounting and unmounting Component</Text>
+        {toggle && <HooksTest />}
         <TouchableOpacity
           style={styles.toggle}
           onPress={() => setToggle(!toggle)}>
@@ -78,7 +85,6 @@ const SettingScreen = () => {
     </View>
   );
 };
-// {toggle && <HooksTest />}
 
 export default SettingScreen;
 
@@ -95,7 +101,7 @@ const styles = StyleSheet.create({
   },
   effectContainer: {
     borderBottomWidth: 1,
-    height: 300,
+    height: 400,
 
     paddingHorizontal: 20,
   },
@@ -113,8 +119,8 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   toggle: {
-    width: '50%',
-    height: 60,
+    width: '60%',
+    height: 50,
     backgroundColor: 'yellow',
     justifyContent: 'center',
     alignItems: 'center',
