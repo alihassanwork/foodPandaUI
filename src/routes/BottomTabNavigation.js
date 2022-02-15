@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeStack from './stacks/HomeStack';
-import SettingScreen from '../screens/SettingScreen';
+import SettingStack from './stacks/SettingStack';
 import ProfileScreen from '../screens/ProfileScreen';
 import Favourites from '../screens/Favourites';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -111,7 +111,7 @@ const BottomTabNavigation = () => {
       <Tab.Screen name="HomeStack" component={HomeStack} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
       <Tab.Screen name="Favourites" component={Favourites} />
-      <Tab.Screen name="Setting" component={SettingScreen} />
+      <Tab.Screen name="Setting" component={SettingStack} />
     </Tab.Navigator>
   );
 };

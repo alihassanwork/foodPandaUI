@@ -1,4 +1,3 @@
-import {StyleSheet} from 'react-native';
 import React from 'react';
 import DrawerNavigation from './src/routes/DrawerNavigation';
 import {NavigationContainer} from '@react-navigation/native';
@@ -16,5 +15,3 @@ const App = () => {
 };
 
 export default App;
-
-const styles = StyleSheet.create({});

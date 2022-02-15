@@ -7,12 +7,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
-import {HooksTest} from '../components';
-import {useFetch} from '../hooks';
-import {COLORS} from '../../constants/theme';
+import {HooksTest} from '../../components';
+import {useFetch} from '../../hooks';
+import {COLORS} from '../../../constants/theme';
 import {useTheme} from '@react-navigation/native';
-import CbCounter from '../components/CbCounter';
-const SettingScreen = () => {
+import CbCounter from '../../components/CbCounter';
+const SettingScreen = ({navigation}) => {
   const {colors} = useTheme();
   //useState hook
   //counter is current state while setCounter mutate the counter value
@@ -110,6 +110,11 @@ const SettingScreen = () => {
           {/*callback*/}
           <CbCounter increment={increment} />
         </View>
+        <TouchableOpacity
+          style={styles.toggle}
+          onPress={() => navigation.navigate('ImageUploadScreen')}>
+          <Text style={styles.heading}>Go To Image Upload Screen</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
