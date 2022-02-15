@@ -5,13 +5,13 @@ const HooksTest = () => {
   // useEffect hook
   useEffect(() => {
     //mounting phase
-    console.log('render');
+    // console.log('render');
 
     //cleanup function return function inside useEffect function logic in cleanup function
 
     return () => {
       //unmounting phase
-      console.log('unmount');
+      // console.log('unmount');
     };
     //[] is dependency array
   }, []);

@@ -35,7 +35,7 @@ const ProfileScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: colors.card}]}>
       <Text style={[styles.textHeader, {color: colors.text}]}>
         Popular Movies
       </Text>

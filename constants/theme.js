@@ -1,6 +1,7 @@
 import {DefaultTheme, DarkTheme} from '@react-navigation/native';
 export const lightTheme = {
   ...DefaultTheme,
+  dark: false,
   colors: {
     ...DefaultTheme.colors,
     primary: '#FD6F93',
@@ -10,6 +11,7 @@ export const lightTheme = {
   },
 };
 export const darkTheme = {
+  dark: true,
   ...DarkTheme,
   colors: {
     ...DarkTheme.colors,
@@ -33,6 +35,10 @@ export const COLORS = {
   grayLight: '#64676D',
   linearColor: 'rgba(255,255,255,0.3)',
   textSecondaryBlack: '#333',
+  lightStatusBg: '#FEFEFE',
+  darkStatusBg: '#121212',
+  red: 'red',
+  green: 'green',
 };
 
 export const fontFamily = {

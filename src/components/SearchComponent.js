@@ -6,7 +6,6 @@ import {useTheme} from '@react-navigation/native';
 
 const SearchComponent = props => {
   const {colors} = useTheme();
-  console.log(colors);
   return (
     <Container style={[styles.container]}>
       <View style={styles.inputWrapper}>

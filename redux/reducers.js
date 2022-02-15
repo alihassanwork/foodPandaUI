@@ -5,7 +5,6 @@ const initialState = {
   movies: [],
   favorites: [],
 };
-console.log(initialState);
 function moviesReducer(state = initialState, action) {
   switch (action.type) {
     case GET_MOVIES:

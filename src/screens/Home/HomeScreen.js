@@ -2,19 +2,18 @@ import {
   StyleSheet,
   ImageBackground,
   View,
-  StatusBar,
   Dimensions,
   ScrollView,
   Text,
   LogBox,
   FlatList,
+  StatusBar,
 } from 'react-native';
 
 import React, {useEffect} from 'react';
 import {SearchComponent} from '../../components';
 import LinearGradient from 'react-native-linear-gradient';
 import {data} from '../../../data';
-import {useSelector, useDispatch} from 'react-redux';
 import {Container} from '../../components/elements';
 import {useTheme} from '@react-navigation/native';
 import {COLORS, fontFamily} from '../../../constants/theme';
@@ -22,12 +21,15 @@ LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
 ]);
 import {MovieCard} from '../../components';
+//redux
 import {getMovies} from '../../../redux/actions';
+import {useSelector, useDispatch} from 'react-redux';
 const HomeScreen = ({navigation}) => {
+  //redux hooks
   const {movies} = useSelector(state => state.moviesReducer);
   const dispatch = useDispatch();
   const fetchMovies = () => dispatch(getMovies());
-  const {colors} = useTheme();
+  const {colors, dark} = useTheme();
   useEffect(() => {
     fetchMovies();
   }, []);
@@ -48,8 +50,11 @@ const HomeScreen = ({navigation}) => {
       style={styles.scrollContainer}
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}>
-      <StatusBar hidden={false} barStyle="light-content" />
       <Container>
+        <StatusBar
+          backgroundColor={dark ? colors.card : COLORS.lightStatusBg}
+          barStyle={dark ? 'light-content' : 'dark-content'}
+        />
         <SearchComponent />
         <ImageBackground
           style={styles.greetingContainer}
@@ -62,7 +67,7 @@ const HomeScreen = ({navigation}) => {
                 styles.h3,
                 {
                   color: colors.text,
-                  fontFamily: 'Muli-Semi-BoldItalic',
+                  fontFamily: fontFamily.fontItalic,
                 },
               ]}>
               What's for dinner? There are 32 restaurant in your area
