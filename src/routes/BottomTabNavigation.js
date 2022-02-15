@@ -7,10 +7,12 @@ import ProfileScreen from '../screens/ProfileScreen';
 import Favourites from '../screens/Favourites';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
+import {useTheme} from '@react-navigation/native';
+import {COLORS} from '../../constants/theme';
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigation = () => {
+  const {colors} = useTheme();
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -18,7 +20,6 @@ const BottomTabNavigation = () => {
         tabBarHideOnKeyboard: true,
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: 'rgba(255, 255, 255, 1)',
           height: 60,
         },
         tabBarIcon: ({focused}) => {
@@ -29,14 +30,14 @@ const BottomTabNavigation = () => {
                   <Ionicons
                     name="ios-home-sharp"
                     size={30}
-                    color={focused ? '#E21A70' : 'rgba(155, 155, 155, 1)'}
+                    color={focused ? colors.primary : COLORS.grayLight}
                   />
 
                   <Text
                     style={[
                       styles.labelText,
                       {
-                        color: focused ? '#E21A70' : 'rgba(155, 155, 155, 1)',
+                        color: focused ? colors.primary : COLORS.grayLight,
                       },
                     ]}>
                     Home
@@ -49,14 +50,14 @@ const BottomTabNavigation = () => {
                   <MaterialIcons
                     name="movie-filter"
                     size={30}
-                    color={focused ? '#E21A70' : 'rgba(155, 155, 155, 1)'}
+                    color={focused ? colors.primary : COLORS.grayLight}
                   />
 
                   <Text
                     style={[
                       styles.labelText,
                       {
-                        color: focused ? '#E21A70' : 'rgba(155, 155, 155, 1)',
+                        color: focused ? colors.primary : COLORS.grayLight,
                       },
                     ]}>
                     Movies
@@ -67,7 +68,7 @@ const BottomTabNavigation = () => {
               return (
                 <View style={styles.iconStyle}>
                   <MaterialIcons
-                    color={focused ? '#E21A70' : 'rgba(155, 155, 155, 1)'}
+                    color={focused ? colors.primary : COLORS.grayLight}
                     size={32}
                     name="favorite"
                   />
@@ -75,7 +76,7 @@ const BottomTabNavigation = () => {
                     style={[
                       styles.labelText,
                       {
-                        color: focused ? '#E21A70' : 'rgba(155, 155, 155, 1)',
+                        color: focused ? colors.primary : COLORS.grayLight,
                       },
                     ]}>
                     Favourites
@@ -88,14 +89,14 @@ const BottomTabNavigation = () => {
                   <Ionicons
                     name="ios-settings-sharp"
                     size={30}
-                    color={focused ? '#E21A70' : 'rgba(155, 155, 155, 1)'}
+                    color={focused ? colors.primary : COLORS.grayLight}
                   />
 
                   <Text
                     style={[
                       styles.labelText,
                       {
-                        color: focused ? '#E21A70' : 'rgba(155, 155, 155, 1)',
+                        color: focused ? colors.primary : COLORS.grayLight,
                       },
                     ]}>
                     Setting
@@ -125,12 +126,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-  },
-  iconFocusedStyle: {
-    top: -10,
-    backgroundColor: '#FFFFFF',
-    elevation: 7,
-    shadowColor: 'rgba(68, 189, 232, 0.3)',
   },
   labelText: {
     fontSize: 12,

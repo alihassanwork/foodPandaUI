@@ -1,9 +1,9 @@
 import {StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
-
+import {useTheme} from '@react-navigation/native';
 const MovieCard = ({navigation, item}) => {
   const IMAGE_URL = 'https://image.tmdb.org/t/p/w185' + item.poster_path;
-
+  const {colors} = useTheme();
   return (
     <TouchableOpacity
       style={styles.cardContainer}
@@ -19,7 +19,9 @@ const MovieCard = ({navigation, item}) => {
         style={styles.poster}
       />
 
-      <Text style={styles.movieTitle}>{item.title}</Text>
+      <Text style={[styles.movieTitle, {color: colors.text}]}>
+        {item.title}
+      </Text>
     </TouchableOpacity>
   );
 };

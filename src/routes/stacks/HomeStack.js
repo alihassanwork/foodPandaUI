@@ -5,8 +5,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {DrawerActions} from '@react-navigation/native';
 import {MovieDetail, HomeScreen} from '../../screens/Home';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
+import {useTheme} from '@react-navigation/native';
+
 const Stack = createNativeStackNavigator();
 const HomeStack = ({navigation, route}) => {
+  const {colors} = useTheme();
   const tabHiddenRoutes = ['MovieDetail'];
   React.useLayoutEffect(() => {
     if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))) {
@@ -31,11 +34,17 @@ const HomeStack = ({navigation, route}) => {
               <TouchableOpacity
                 onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
                 style={{marginLeft: 10}}>
-                <Ionicons name="menu-outline" size={30} color="#E21A70" />
+                <Ionicons
+                  name="menu-outline"
+                  size={30}
+                  color={colors.primary}
+                />
               </TouchableOpacity>
               <View style={{paddingLeft: 15}}>
-                <Text style={Styles.currentLocation}>Current Location</Text>
-                <Text style={Styles.locationUser}>
+                <Text style={[Styles.currentLocation, {color: colors.primary}]}>
+                  Current Location
+                </Text>
+                <Text style={[Styles.locationUser, {color: colors.text}]}>
                   Cubator 1 Sunrise Avenue
                 </Text>
               </View>
@@ -47,7 +56,7 @@ const HomeStack = ({navigation, route}) => {
               <Ionicons
                 name="ios-cart-outline"
                 size={25}
-                color="#E21A70"
+                color={colors.primary}
                 style={{paddingRight: 20}}
               />
             </TouchableOpacity>
@@ -73,12 +82,10 @@ const Styles = StyleSheet.create({
   currentLocation: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#E21A70',
     fontFamily: 'Muli',
   },
   locationUser: {
     fontSize: 14,
-    color: '#333',
     fontFamily: 'Muli',
   },
 });

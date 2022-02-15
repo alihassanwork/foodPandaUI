@@ -9,11 +9,11 @@ import {
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {addFavorite, removeFavorite} from '../../redux/actions';
-
+import {useTheme} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const ProfileScreen = () => {
   const {movies, favorites} = useSelector(state => state.moviesReducer);
-
+  const {colors} = useTheme();
   const dispatch = useDispatch();
   const addToFavorites = movie => dispatch(addFavorite(movie));
   const removeFromFavorites = movie => dispatch(removeFavorite(movie));
@@ -36,7 +36,9 @@ const ProfileScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textHeader}>Popular Movies</Text>
+      <Text style={[styles.textHeader, {color: colors.text}]}>
+        Popular Movies
+      </Text>
       <View style={styles.flatListContainer}>
         <FlatList
           data={movies}
@@ -56,11 +58,14 @@ const ProfileScreen = () => {
                   />
                   <View style={styles.voteContainer}>
                     <View>
-                      <Text style={styles.movieTitle}>{item.title}</Text>
+                      <Text style={[styles.movieTitle, {color: colors.text}]}>
+                        {item.title}
+                      </Text>
                     </View>
                     <View style={styles.likeBtn}>
                       <MaterialIcons color="green" name="thumb-up" size={32} />
-                      <Text style={styles.voteCountStyle}>
+                      <Text
+                        style={[styles.voteCountStyle, {color: colors.text}]}>
                         {item.vote_count}
                       </Text>
                       <TouchableOpacity
@@ -115,7 +120,6 @@ const styles = StyleSheet.create({
   voteCountStyle: {
     fontSize: 18,
     paddingLeft: 10,
-    color: '#64676D',
   },
   movieContainer: {flexDirection: 'row', flex: 1},
   posterStyle: {width: 100, height: 150, borderRadius: 10},

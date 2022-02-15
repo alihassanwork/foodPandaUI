@@ -3,7 +3,9 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import {removeFavorite} from '../../redux/actions';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {useTheme} from '@react-navigation/native';
 const FavouriteCard = ({item}) => {
+  const {colors} = useTheme();
   const IMAGE_URL = 'https://image.tmdb.org/t/p/w185' + item.poster_path;
   const dispatch = useDispatch();
   const removeFromFavorites = movie => dispatch(removeFavorite(movie));
@@ -20,11 +22,15 @@ const FavouriteCard = ({item}) => {
         />
         <View style={Styles.infoContainer}>
           <View>
-            <Text style={Styles.titleMovie}>{item.title}</Text>
+            <Text style={[Styles.titleMovie, {color: colors.text}]}>
+              {item.title}
+            </Text>
           </View>
           <View style={Styles.likeContainer}>
             <MaterialIcons color="green" name="thumb-up" size={32} />
-            <Text style={Styles.voteCount}>{item.vote_count}</Text>
+            <Text style={[Styles.voteCount, {color: colors.text}]}>
+              {item.vote_count}
+            </Text>
             <TouchableOpacity
               onPress={() => handleRemoveFavorite(item)}
               activeOpacity={0.7}
@@ -54,7 +60,6 @@ const Styles = StyleSheet.create({
   voteCount: {
     fontSize: 18,
     paddingLeft: 10,
-    color: '#64676D',
   },
   removeFavorite: {
     marginLeft: 14,

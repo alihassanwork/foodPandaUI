@@ -10,13 +10,16 @@ import {
 import {DrawerContentScrollView} from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 const {height} = Dimensions.get('screen');
+import {useTheme} from '@react-navigation/native';
 const CustomDrawer = props => {
+  const {colors} = useTheme();
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView
         {...props}
-        contentContainerStyle={{backgroundColor: 'white'}}>
-        <View style={styles.headerContainer}>
+        contentContainerStyle={{backgroundColor: colors.card}}>
+        <View
+          style={[styles.headerContainer, {backgroundColor: colors.primary}]}>
           <TouchableWithoutFeedback onPress={() => alert('Navigate to login')}>
             <Text style={styles.textStyle}>Log in / Create account</Text>
           </TouchableWithoutFeedback>
@@ -28,19 +31,21 @@ const CustomDrawer = props => {
               name="md-help-circle-outline"
               size={30}
               style={{paddingHorizontal: 10}}
-              color="#E21A70"
+              color={colors.primary}
             />
-            <Text style={[styles.textStyle, {color: 'black'}]}>
+            <Text style={[styles.textStyle, {color: colors.text}]}>
               Help Center
             </Text>
           </View>
           <View style={styles.footerContainer}>
             <TouchableOpacity
               onPress={() => alert('Navigate to setting screen')}>
-              <Text style={[styles.textStyle, {color: 'black'}]}>Settings</Text>
+              <Text style={[styles.textStyle, {color: colors.text}]}>
+                Settings
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => alert('terms and conditions')}>
-              <Text style={[styles.textStyle, {color: 'black'}]}>
+              <Text style={[styles.textStyle, {color: colors.text}]}>
                 Terms & Conditions / Privacy
               </Text>
             </TouchableOpacity>
@@ -56,7 +61,6 @@ export default CustomDrawer;
 const styles = StyleSheet.create({
   headerContainer: {
     height: height * 0.25,
-    backgroundColor: '#E21A70',
     justifyContent: 'flex-end',
     padding: 15,
   },

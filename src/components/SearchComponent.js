@@ -1,31 +1,35 @@
 import React from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Container} from './elements';
+import {useTheme} from '@react-navigation/native';
+
 const SearchComponent = props => {
+  const {colors} = useTheme();
+  console.log(colors);
   return (
-    <View style={[styles.container]}>
+    <Container style={[styles.container]}>
       <View style={styles.inputWrapper}>
         <Ionicons
           name="ios-search-outline"
           size={30}
           style={{paddingHorizontal: 10}}
-          color="#8D8D8D"
+          color={colors.text}
         />
         <TextInput
           placeholder="Search for shops & restaurants"
           style={styles.formField}
-          placeholderTextColor={'#888888'}
+          placeholderTextColor={colors.text}
           borderWidth={0}
         />
       </View>
-    </View>
+    </Container>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    backgroundColor: 'white',
     alignItems: 'center',
     paddingVertical: 10,
     borderBottomWidth: 0.25,
@@ -38,7 +42,6 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   inputWrapper: {
-    backgroundColor: '#F7F7F7',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
