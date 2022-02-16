@@ -1,4 +1,4 @@
-import {GET_MOVIES, ADD_FAVORITE_ITEM, REMOVE_FAVORITE_ITEM} from './actions';
+import {GET_MOVIES, ADD_FAVORITE_ITEM, REMOVE_FAVORITE_ITEM} from '../actions';
 
 // inital state => object with two arrays
 const initialState = {

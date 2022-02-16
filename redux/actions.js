@@ -4,6 +4,7 @@ import axios from 'axios';
 export const GET_MOVIES = 'FETCH_MOVIES';
 export const ADD_FAVORITE_ITEM = 'ADD_FAVORITE_ITEM';
 export const REMOVE_FAVORITE_ITEM = 'REMOVE_FAVORITE_ITEM';
+export const USER_PROFILE_IMAGE = 'USER_PROFILE_IMAGE';
 
 // Construct a BASE URL for API endpoint
 const API_URL = 'https://api.themoviedb.org/3/movie/popular';
@@ -44,5 +45,14 @@ export const removeFavorite = movie => dispatch => {
   dispatch({
     type: REMOVE_FAVORITE_ITEM,
     payload: movie,
+  });
+};
+
+//USER profile
+export const setUserProfile = image => dispatch => {
+  console.log('dispatch: ', image);
+  dispatch({
+    type: USER_PROFILE_IMAGE,
+    payload: image,
   });
 };
