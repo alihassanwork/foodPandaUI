@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 import Profile from '../../screens/Profile/Profile';
 import SignInScreen from '../../screens/Profile/SignInScreen';
-const ProfileStack = ({navigation, route}) => {
+const ProfileStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="ProfileScreen" component={Profile} />

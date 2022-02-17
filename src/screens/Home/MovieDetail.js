@@ -12,6 +12,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 const MovieDetail = ({route, navigation}) => {
   const {movie} = route.params;
   const IMAGE_URL = 'https://image.tmdb.org/t/p/w185' + movie.poster_path;
+  React.useEffect(() => {
+    console.log(movie.id);
+  }, []);
   return (
     <ImageBackground style={styles.container} source={{uri: IMAGE_URL}}>
       <View style={styles.detailContainer}>

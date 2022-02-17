@@ -13,7 +13,7 @@ const VideoPlayerScreen = ({navigation}) => {
         onBack={() => navigation.navigate('ImageUploadScreen')}
         controlAnimationTiming={750}
         source={{
-          uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+          uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
         }} // Can be a URL or a local file.
         style={{flex: 1}}
       />

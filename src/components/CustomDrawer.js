@@ -21,7 +21,7 @@ const CustomDrawer = props => {
         <View
           style={[styles.headerContainer, {backgroundColor: colors.primary}]}>
           <TouchableWithoutFeedback
-            onPress={() => props.navigation.navigate('SignInScreen')}>
+            onPress={() => props.navigation.navigate('Profile')}>
             <Text style={styles.textStyle}>Log in / Create account</Text>
           </TouchableWithoutFeedback>
         </View>

@@ -5,7 +5,7 @@ export const GET_MOVIES = 'FETCH_MOVIES';
 export const ADD_FAVORITE_ITEM = 'ADD_FAVORITE_ITEM';
 export const REMOVE_FAVORITE_ITEM = 'REMOVE_FAVORITE_ITEM';
 export const USER_PROFILE_IMAGE = 'USER_PROFILE_IMAGE';
-
+export const USER_DATA = 'USER_DATA';
 // Construct a BASE URL for API endpoint
 const API_URL = 'https://api.themoviedb.org/3/movie/popular';
 const API_KEY = 'bb925e230868e5ea561be5d9be231edb';
@@ -53,5 +53,11 @@ export const setUserProfile = image => dispatch => {
   dispatch({
     type: USER_PROFILE_IMAGE,
     payload: image,
+  });
+};
+export const setUserData = userInfo => dispatch => {
+  dispatch({
+    type: USER_DATA,
+    payload: userInfo,
   });
 };

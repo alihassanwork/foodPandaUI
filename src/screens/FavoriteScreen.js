@@ -33,7 +33,6 @@ const FavoriteScreen = () => {
 
     return false;
   };
-
   return (
     <View style={[styles.container, {backgroundColor: colors.background}]}>
       <Text style={[styles.textHeader, {color: colors.text}]}>
