@@ -50,7 +50,6 @@ export const removeFavorite = movie => dispatch => {
 
 //USER profile
 export const setUserProfile = image => dispatch => {
-  console.log('dispatch: ', image);
   dispatch({
     type: USER_PROFILE_IMAGE,
     payload: image,

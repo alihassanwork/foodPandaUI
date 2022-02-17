@@ -8,6 +8,7 @@ import {
   LogBox,
   FlatList,
   StatusBar,
+  Image,
 } from 'react-native';
 
 import React, {useEffect} from 'react';
@@ -27,6 +28,7 @@ import {useSelector, useDispatch} from 'react-redux';
 const HomeScreen = ({navigation}) => {
   //redux hooks
   const {movies} = useSelector(state => state.moviesReducer);
+  const {user} = useSelector(state => state.userReducer);
   const dispatch = useDispatch();
   const fetchMovies = () => dispatch(getMovies());
   const {colors, dark} = useTheme();
@@ -52,7 +54,7 @@ const HomeScreen = ({navigation}) => {
       showsVerticalScrollIndicator={false}>
       <Container>
         <StatusBar
-          backgroundColor={dark ? colors.card : COLORS.lightStatusBg}
+          backgroundColor={dark ? colors.background : COLORS.lightStatusBg}
           barStyle={dark ? 'light-content' : 'dark-content'}
         />
         <SearchComponent />
@@ -60,7 +62,13 @@ const HomeScreen = ({navigation}) => {
           style={styles.greetingContainer}
           source={require('../../../assets/images/greetingbg.png')}
           resizeMode="cover">
-          <Text style={[styles.h1, {color: colors.text}]}>Good evening,</Text>
+          <Image
+            style={[styles.avatar, {borderColor: colors.text}]}
+            source={{uri: user.image}}
+          />
+          <Text style={[styles.h1, {color: colors.text}]}>
+            Good evening {user.firstName}
+          </Text>
           <View style={{width: '60%'}}>
             <Text
               style={[
@@ -291,5 +299,12 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.blueLight,
     borderRadius: 10,
     justifyContent: 'flex-end',
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    borderWidth: 1,
+    marginBottom: 5,
   },
 });

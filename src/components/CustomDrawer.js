@@ -17,10 +17,11 @@ const CustomDrawer = props => {
     <View style={{flex: 1}}>
       <DrawerContentScrollView
         {...props}
-        contentContainerStyle={{backgroundColor: colors.card}}>
+        contentContainerStyle={{backgroundColor: colors.background}}>
         <View
           style={[styles.headerContainer, {backgroundColor: colors.primary}]}>
-          <TouchableWithoutFeedback onPress={() => alert('Navigate to login')}>
+          <TouchableWithoutFeedback
+            onPress={() => props.navigation.navigate('SignInScreen')}>
             <Text style={styles.textStyle}>Log in / Create account</Text>
           </TouchableWithoutFeedback>
         </View>
@@ -39,7 +40,7 @@ const CustomDrawer = props => {
           </View>
           <View style={styles.footerContainer}>
             <TouchableOpacity
-              onPress={() => alert('Navigate to setting screen')}>
+              onPress={() => props.navigation.navigate('SettingScreen')}>
               <Text style={[styles.textStyle, {color: colors.text}]}>
                 Settings
               </Text>

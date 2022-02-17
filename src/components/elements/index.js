@@ -1,2 +1,3 @@
 import Container from './Container';
-export {Container};
+import Text from './Text';
+export {Container, Text};

@@ -11,7 +11,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {addFavorite, removeFavorite} from '../../redux/actions';
 import {useTheme} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-const ProfileScreen = () => {
+const FavoriteScreen = () => {
   const {movies, favorites} = useSelector(state => state.moviesReducer);
   const {colors} = useTheme();
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ const ProfileScreen = () => {
   };
 
   return (
-    <View style={[styles.container, {backgroundColor: colors.card}]}>
+    <View style={[styles.container, {backgroundColor: colors.background}]}>
       <Text style={[styles.textHeader, {color: colors.text}]}>
         Popular Movies
       </Text>
@@ -95,7 +95,7 @@ const ProfileScreen = () => {
   );
 };
 
-export default ProfileScreen;
+export default FavoriteScreen;
 
 const styles = StyleSheet.create({
   container: {flex: 1, paddingHorizontal: 20},

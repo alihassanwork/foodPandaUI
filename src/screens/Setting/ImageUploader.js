@@ -3,12 +3,12 @@ import React from 'react';
 import {Container} from '../../components/elements';
 import {useTheme} from '@react-navigation/native';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+
 //redux
 import {useSelector, useDispatch} from 'react-redux';
 import {setUserProfile} from '../../../redux/actions';
-const ImageUploader = () => {
+const ImageUploader = ({navigation}) => {
   const {colors} = useTheme();
-  const [resourcePath, setResourcePath] = React.useState(null);
   //Select Image
   //redux
   const {user} = useSelector(state => state.userReducer);
@@ -16,11 +16,10 @@ const ImageUploader = () => {
   const dispatch = useDispatch();
   const handleSetProfile = image => dispatch(setUserProfile(image));
   //redux end
-  const selectImage = () => {
+  const cameraImage = () => {
     var options = {
-      cameraType: 'back',
       quality: 0.75,
-      saveToPhotos: true,
+      mediaType: 'photo',
     };
     launchCamera(options, res => {
       if (res.didCancel) {
@@ -36,7 +35,25 @@ const ImageUploader = () => {
       }
     });
   };
-  console.log(user);
+  const selectImage = () => {
+    var options = {
+      mediaType: 'photo',
+      quality: 0.75,
+    };
+    launchImageLibrary(options, res => {
+      if (res.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (res.error) {
+        console.log('ImagePicker Error: ', res.error);
+      } else if (res.customButton) {
+        console.log('User tapped custom button: ', res.customButton);
+        alert(res.customButton);
+      } else {
+        let source = res.assets[0].uri;
+        handleSetProfile(source);
+      }
+    });
+  };
 
   return (
     <Container style={styles.container}>
@@ -45,30 +62,35 @@ const ImageUploader = () => {
         <Image
           style={[styles.image, {borderColor: colors.text}]}
           source={{
-            uri: user.image
-              ? user.image
-              : 'https://gravatar.com/avatar/4bd8a7954f4978b3d04c39af4e5bd4d2?s=400&d=robohash&r=x',
+            uri: user.image,
           }}
         />
       </View>
-      <View style={styles.btnContainer}>
+      <View style={[styles.btnContainer, {borderColor: colors.text}]}>
         <TouchableOpacity
-          onPress={() => selectImage()}
+          onPress={() => cameraImage()}
           style={[styles.selectImage, {backgroundColor: colors.text}]}>
-          <Text style={[styles.heading, {color: colors.card}]}>
-            Select File
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.selectImage, {backgroundColor: colors.text}]}>
-          <Text style={[styles.heading, {color: colors.card}]}>
+          <Text style={[styles.heading, {color: colors.background}]}>
             Launch Camera directly
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          onPress={() => selectImage()}
           style={[styles.selectImage, {backgroundColor: colors.text}]}>
-          <Text style={[styles.heading, {color: colors.card}]}>
+          <Text style={[styles.heading, {color: colors.background}]}>
             Launch Image Gallery directly
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('VideoPlayerScreen')}
+          style={[
+            styles.selectImage,
+            {backgroundColor: colors.text, width: '60%'},
+          ]}>
+          <Text style={[styles.heading, {color: colors.background}]}>
+            Go To video Player
           </Text>
         </TouchableOpacity>
       </View>
@@ -84,6 +106,8 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 20,
+    alignSelf: 'center',
+    paddingVertical: 10,
   },
   image: {
     width: 150,
@@ -96,7 +120,8 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     alignItems: 'center',
-    paddingVertical: 20,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
   },
   selectImage: {
     paddingVertical: 10,

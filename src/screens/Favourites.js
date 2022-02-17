@@ -8,7 +8,7 @@ const Favourites = () => {
   const {favorites} = useSelector(state => state.moviesReducer);
   const {colors} = useTheme();
   return (
-    <View style={[Styles.container, {backgroundColor: colors.card}]}>
+    <View style={[Styles.container, {backgroundColor: colors.background}]}>
       <Text style={[Styles.favouritesText, {color: colors.text}]}>
         Favorites
       </Text>

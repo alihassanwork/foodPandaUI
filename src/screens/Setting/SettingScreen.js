@@ -47,7 +47,7 @@ const SettingScreen = ({navigation}) => {
     setCbCounter(prevState => prevState + 1);
   }, [setCbCounter]);
   return (
-    <View style={[styles.container, {backgroundColor: colors.card}]}>
+    <View style={[styles.container, {backgroundColor: colors.background}]}>
       <View style={styles.counterContainer}>
         <Button
           onPress={() => setCounter(prevState => prevState - 1)}
@@ -69,7 +69,7 @@ const SettingScreen = ({navigation}) => {
           ref={inputRef}
           style={[
             styles.input,
-            {backgroundColor: colors.card, color: colors.text},
+            {backgroundColor: colors.background, color: colors.text},
           ]}
           placeholder="Enter email address"
           placeholderTextColor={colors.text}

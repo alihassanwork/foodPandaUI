@@ -3,7 +3,8 @@ import {StyleSheet, View, Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeStack from './stacks/HomeStack';
 import SettingStack from './stacks/SettingStack';
-import ProfileScreen from '../screens/ProfileScreen';
+import ProfileStack from './stacks/ProfileStack';
+import FavoriteScreen from '../screens/FavoriteScreen';
 import Favourites from '../screens/Favourites';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -44,7 +45,7 @@ const BottomTabNavigation = () => {
                   </Text>
                 </View>
               );
-            case 'Profile':
+            case 'FavoriteScreen':
               return (
                 <View style={styles.iconStyle}>
                   <MaterialIcons
@@ -103,15 +104,36 @@ const BottomTabNavigation = () => {
                   </Text>
                 </View>
               );
+            case 'Profile':
+              return (
+                <View style={styles.iconStyle}>
+                  <Ionicons
+                    name="person-sharp"
+                    size={30}
+                    color={focused ? colors.primary : COLORS.grayLight}
+                  />
+
+                  <Text
+                    style={[
+                      styles.labelText,
+                      {
+                        color: focused ? colors.primary : COLORS.grayLight,
+                      },
+                    ]}>
+                    Setting
+                  </Text>
+                </View>
+              );
             default:
               break;
           }
         },
       })}>
       <Tab.Screen name="HomeStack" component={HomeStack} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="FavoriteScreen" component={FavoriteScreen} />
       <Tab.Screen name="Favourites" component={Favourites} />
       <Tab.Screen name="Setting" component={SettingStack} />
+      <Tab.Screen name="Profile" component={ProfileStack} />
     </Tab.Navigator>
   );
 };

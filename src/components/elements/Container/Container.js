@@ -5,7 +5,9 @@ const Container = ({children, hasPadding, style, ...rest}) => {
   const padding = hasPadding ? 10 : 0;
   const {colors} = useTheme();
   return (
-    <View style={[{backgroundColor: colors.card, padding}, style]} {...rest}>
+    <View
+      style={[{backgroundColor: colors.background, padding}, style]}
+      {...rest}>
       {children}
     </View>
   );

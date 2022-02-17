@@ -10,7 +10,7 @@ import {useTheme} from '@react-navigation/native';
 const Stack = createNativeStackNavigator();
 const HomeStack = ({navigation, route}) => {
   const {colors} = useTheme();
-  const tabHiddenRoutes = ['MovieDetail'];
+  const tabHiddenRoutes = ['MovieDetail', 'VideoPlayerScreen'];
   React.useLayoutEffect(() => {
     if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))) {
       navigation.setOptions({tabBarStyle: {display: 'none'}});
