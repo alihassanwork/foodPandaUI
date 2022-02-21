@@ -3,6 +3,13 @@ import thunk from 'redux-thunk';
 
 import moviesReducer from './reducers/reducers';
 import userReducer from './reducers/userReducer';
-const rootReducer = combineReducers({moviesReducer, userReducer});
+import hotelReducer from './reducers/hotelReducer';
+import cartReducer from './reducers/cartReducer';
+const rootReducer = combineReducers({
+  moviesReducer,
+  userReducer,
+  hotelReducer,
+  cartReducer,
+});
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));

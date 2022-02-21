@@ -9,10 +9,11 @@ import {
   FlatList,
   StatusBar,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 
 import React, {useEffect} from 'react';
-import {SearchComponent} from '../../components';
+import {SearchComponent, Header} from '../../components';
 import LinearGradient from 'react-native-linear-gradient';
 import {data} from '../../../data';
 import {Container} from '../../components/elements';
@@ -48,146 +49,155 @@ const HomeScreen = ({navigation}) => {
   };
 
   return (
-    <ScrollView
-      style={styles.scrollContainer}
-      showsHorizontalScrollIndicator={false}
-      showsVerticalScrollIndicator={false}>
-      <Container>
-        <StatusBar
-          backgroundColor={dark ? colors.background : COLORS.lightStatusBg}
-          barStyle={dark ? 'light-content' : 'dark-content'}
-        />
-        <SearchComponent />
-        <ImageBackground
-          style={styles.greetingContainer}
-          source={require('../../../assets/images/greetingbg.png')}
-          resizeMode="cover">
-          <Image
-            style={[styles.avatar, {borderColor: colors.text}]}
-            source={{uri: user.image}}
+    <Container style={{flex: 1}}>
+      <Header navigation={navigation} />
+      <ScrollView
+        style={styles.scrollContainer}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}>
+        <Container>
+          <StatusBar
+            backgroundColor={dark ? colors.background : COLORS.lightStatusBg}
+            barStyle={dark ? 'light-content' : 'dark-content'}
           />
-          <Text style={[styles.h1, {color: colors.text}]}>
-            Good evening {user.firstName}
-          </Text>
-          <View style={{width: '60%'}}>
-            <Text
-              style={[
-                styles.h3,
-                {
-                  color: colors.text,
-                  fontFamily: fontFamily.fontItalic,
-                },
-              ]}>
-              What's for dinner? There are 32 restaurant in your area
-            </Text>
-          </View>
-        </ImageBackground>
-        <View style={styles.containerWrapper}>
+          <SearchComponent />
           <ImageBackground
-            style={styles.devliveryContainer}
-            source={require('../../../assets/images/delivery.png')}
-            resizeMode="contain">
-            <LinearGradient
-              colors={['transparent', COLORS.linearColor]}
-              style={styles.gradientContainer}>
-              <Text style={[styles.h1, {color: COLORS.white}]}>
-                Food delivery
+            style={styles.greetingContainer}
+            source={require('../../../assets/images/greetingbg.png')}
+            resizeMode="cover">
+            <Image
+              style={[styles.avatar, {borderColor: colors.text}]}
+              source={{uri: user.image}}
+            />
+            <Text style={[styles.h1, {color: colors.text}]}>
+              Good evening {user.firstName}
+            </Text>
+            <View style={{width: '60%'}}>
+              <Text
+                style={[
+                  styles.h3,
+                  {
+                    color: colors.text,
+                    fontFamily: fontFamily.fontItalic,
+                  },
+                ]}>
+                What's for dinner? There are 32 restaurant in your area
               </Text>
-              <Text style={[styles.h3, {color: COLORS.white}]}>
-                Order from your favorite restaurants and home chefs
-              </Text>
-            </LinearGradient>
+            </View>
           </ImageBackground>
-        </View>
-        <View
-          style={[
-            styles.containerWrapper,
-            {flexDirection: 'row', justifyContent: 'space-between'},
-          ]}>
-          <View style={styles.martContainer}>
+          <TouchableOpacity
+            style={styles.containerWrapper}
+            onPress={() => navigation.navigate('FoodDelivery')}>
             <ImageBackground
+              style={styles.devliveryContainer}
               source={require('../../../assets/images/delivery.png')}
-              resizeMode="contain"
-              style={styles.containerbg}>
-              <Text style={[styles.h1, {color: COLORS.black}]}>
-                Food delivery
-              </Text>
-              <Text style={[styles.h3, {color: COLORS.black}]}>
-                Enjoy FLAT 25% off {'\n'}and more...
-              </Text>
+              resizeMode="contain">
+              <LinearGradient
+                colors={['transparent', COLORS.linearColor]}
+                style={styles.gradientContainer}>
+                <Text style={[styles.h1, {color: COLORS.white}]}>
+                  Food delivery
+                </Text>
+                <Text style={[styles.h3, {color: COLORS.white}]}>
+                  Order from your favorite restaurants and home chefs
+                </Text>
+              </LinearGradient>
             </ImageBackground>
-          </View>
-          <View style={styles.shopAndPickWrapper}>
-            <View style={styles.pickupContainer}>
+          </TouchableOpacity>
+          <View
+            style={[
+              styles.containerWrapper,
+              {flexDirection: 'row', justifyContent: 'space-between'},
+            ]}>
+            <View style={styles.martContainer}>
               <ImageBackground
                 source={require('../../../assets/images/delivery.png')}
                 resizeMode="contain"
                 style={styles.containerbg}>
-                <LinearGradient
-                  colors={['transparent', COLORS.linearColor]}
-                  style={styles.gradientContainer}>
-                  <Text style={[styles.h1, {color: COLORS.textSecondaryBlack}]}>
-                    Pick-Up
-                  </Text>
-                  <Text style={[styles.h3, {color: COLORS.textSecondaryBlack}]}>
-                    Enjoy FLAT 25% {'\n'} off and more...
-                  </Text>
-                </LinearGradient>
+                <Text style={[styles.h1, {color: COLORS.black}]}>
+                  pandamart
+                </Text>
+                <Text style={[styles.h3, {color: COLORS.black}]}>
+                  Enjoy FLAT 25% off {'\n'}and more...
+                </Text>
               </ImageBackground>
             </View>
-            <View style={styles.shopContainer}>
-              <ImageBackground
-                source={require('../../../assets/images/delivery.png')}
-                resizeMode="contain"
-                style={styles.containerbg}>
-                <LinearGradient
-                  colors={['transparent', COLORS.linearColor]}
-                  style={styles.gradientContainer}>
-                  <Text style={[styles.h1, {color: COLORS.textSecondaryBlack}]}>
-                    Shops
-                  </Text>
-                  <Text style={[styles.h3, {color: COLORS.textSecondaryBlack}]}>
-                    Grocery & more..
-                  </Text>
-                </LinearGradient>
-              </ImageBackground>
+            <View style={styles.shopAndPickWrapper}>
+              <View style={styles.pickupContainer}>
+                <ImageBackground
+                  source={require('../../../assets/images/delivery.png')}
+                  resizeMode="contain"
+                  style={styles.containerbg}>
+                  <LinearGradient
+                    colors={['transparent', COLORS.linearColor]}
+                    style={styles.gradientContainer}>
+                    <Text
+                      style={[styles.h1, {color: COLORS.textSecondaryBlack}]}>
+                      Pick-Up
+                    </Text>
+                    <Text
+                      style={[styles.h3, {color: COLORS.textSecondaryBlack}]}>
+                      Enjoy FLAT 25% {'\n'} off and more...
+                    </Text>
+                  </LinearGradient>
+                </ImageBackground>
+              </View>
+              <View style={styles.shopContainer}>
+                <ImageBackground
+                  source={require('../../../assets/images/delivery.png')}
+                  resizeMode="contain"
+                  style={styles.containerbg}>
+                  <LinearGradient
+                    colors={['transparent', COLORS.linearColor]}
+                    style={styles.gradientContainer}>
+                    <Text
+                      style={[styles.h1, {color: COLORS.textSecondaryBlack}]}>
+                      Shops
+                    </Text>
+                    <Text
+                      style={[styles.h3, {color: COLORS.textSecondaryBlack}]}>
+                      Grocery & more..
+                    </Text>
+                  </LinearGradient>
+                </ImageBackground>
+              </View>
             </View>
           </View>
-        </View>
-        <Text style={[styles.h1, {paddingLeft: 10}, {color: colors.text}]}>
-          CINEPAX
-        </Text>
-        <View style={{paddingHorizontal: 10}}>
-          <FlatList
-            horizontal
-            data={movies}
-            keyExtractor={item => item.id.toString()}
-            renderItem={({item}) => (
-              <MovieCard item={item} navigation={navigation} />
-            )}
-            showsHorizontalScrollIndicator={false}
-          />
-        </View>
-        <Text
-          style={[
-            styles.h1,
-            {paddingLeft: 10, marginVertical: 5, color: colors.text},
-          ]}>
-          YOUR DAILY DEALS
-        </Text>
-        <View style={styles.footerContainer}>
-          <FlatList
-            data={data}
-            renderItem={renderItem}
-            horizontal
-            showsVerticalScrollIndicator={false}
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={item => item.id}
-            decelerationRate={'normal'}
-          />
-        </View>
-      </Container>
-    </ScrollView>
+          <Text style={[styles.h1, {paddingLeft: 10}, {color: colors.text}]}>
+            CINEPAX
+          </Text>
+          <View style={{paddingHorizontal: 10}}>
+            <FlatList
+              horizontal
+              data={movies}
+              keyExtractor={item => item.id.toString()}
+              renderItem={({item}) => (
+                <MovieCard item={item} navigation={navigation} />
+              )}
+              showsHorizontalScrollIndicator={false}
+            />
+          </View>
+          <Text
+            style={[
+              styles.h1,
+              {paddingLeft: 10, marginVertical: 5, color: colors.text},
+            ]}>
+            YOUR DAILY DEALS
+          </Text>
+          <View style={styles.footerContainer}>
+            <FlatList
+              data={data}
+              renderItem={renderItem}
+              horizontal
+              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={item => item.id}
+              decelerationRate={'normal'}
+            />
+          </View>
+        </Container>
+      </ScrollView>
+    </Container>
   );
 };
 
@@ -206,12 +216,12 @@ const styles = StyleSheet.create({
   h1: {
     fontSize: 18,
     fontWeight: '800',
-    fontFamily: 'Muli',
+    fontFamily: fontFamily.fontBold,
   },
   h3: {
     fontSize: 14,
     fontWeight: '300',
-    fontFamily: 'Muli',
+    fontFamily: fontFamily.fontBold,
   },
   devliveryContainer: {
     width: '95%',

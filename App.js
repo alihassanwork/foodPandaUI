@@ -7,7 +7,7 @@ import {Provider} from 'react-redux';
 const App = () => {
   return (
     <Provider store={store}>
-      <NavigationContainer theme={lightTheme}>
+      <NavigationContainer theme={darkTheme}>
         <DrawerNavigation />
       </NavigationContainer>
     </Provider>

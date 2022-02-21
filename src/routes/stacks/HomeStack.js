@@ -6,7 +6,8 @@ import {DrawerActions} from '@react-navigation/native';
 import {MovieDetail, HomeScreen} from '../../screens/Home';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {useTheme} from '@react-navigation/native';
-
+import Cart from '../../screens/Home/Cart';
+import {HotelDetail, FoodDelivery} from '../../screens/Home/FoodDelivery';
 const Stack = createNativeStackNavigator();
 const HomeStack = ({navigation, route}) => {
   const {colors} = useTheme();
@@ -28,44 +29,27 @@ const HomeStack = ({navigation, route}) => {
         name="Home"
         component={HomeScreen}
         options={{
-          title: null,
-          headerLeft: () => (
-            <View style={Styles.headerLeftContainer}>
-              <TouchableOpacity
-                onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-                style={{marginLeft: 10}}>
-                <Ionicons
-                  name="menu-outline"
-                  size={30}
-                  color={colors.primary}
-                />
-              </TouchableOpacity>
-              <View style={{paddingLeft: 15}}>
-                <Text style={[Styles.currentLocation, {color: colors.primary}]}>
-                  Current Location
-                </Text>
-                <Text style={[Styles.locationUser, {color: colors.text}]}>
-                  Cubator 1 Sunrise Avenue
-                </Text>
-              </View>
-            </View>
-          ),
-          headerRight: ({focused}) => (
-            <TouchableOpacity
-              onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-              <Ionicons
-                name="ios-cart-outline"
-                size={25}
-                color={colors.primary}
-                style={{paddingRight: 20}}
-              />
-            </TouchableOpacity>
-          ),
+          headerShown: false,
         }}
       />
       <Stack.Screen
         name="MovieDetail"
         component={MovieDetail}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="FoodDelivery"
+        component={FoodDelivery}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="HotelDetail"
+        component={HotelDetail}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="CartScreen"
+        component={Cart}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

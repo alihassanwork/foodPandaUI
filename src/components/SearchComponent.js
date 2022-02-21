@@ -7,7 +7,7 @@ import {useTheme} from '@react-navigation/native';
 const SearchComponent = props => {
   const {colors} = useTheme();
   return (
-    <Container style={[styles.container]}>
+    <Container style={styles.container}>
       <View style={styles.inputWrapper}>
         <Ionicons
           name="ios-search-outline"
@@ -19,7 +19,7 @@ const SearchComponent = props => {
           placeholder="Search for shops & restaurants"
           style={styles.formField}
           placeholderTextColor={colors.text}
-          borderWidth={0}
+          borderWidth={0.15}
         />
       </View>
     </Container>
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     height: 40,
     width: '80%',
+    borderRadius: 20,
   },
   inputWrapper: {
     flexDirection: 'row',

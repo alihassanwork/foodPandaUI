@@ -1,11 +1,13 @@
 import axios from 'axios';
-
+import hotels from '../src/api/hotels';
 // Define action types
 export const GET_MOVIES = 'FETCH_MOVIES';
 export const ADD_FAVORITE_ITEM = 'ADD_FAVORITE_ITEM';
 export const REMOVE_FAVORITE_ITEM = 'REMOVE_FAVORITE_ITEM';
 export const USER_PROFILE_IMAGE = 'USER_PROFILE_IMAGE';
 export const USER_DATA = 'USER_DATA';
+export const HOTELS = 'HOTELS';
+
 // Construct a BASE URL for API endpoint
 const API_URL = 'https://api.themoviedb.org/3/movie/popular';
 const API_KEY = 'bb925e230868e5ea561be5d9be231edb';
@@ -60,4 +62,28 @@ export const setUserData = userInfo => dispatch => {
     type: USER_DATA,
     payload: userInfo,
   });
+};
+
+export const getHotels = () => {
+  try {
+    return async dispatch => {
+      const res = await hotels.get('/search', {
+        params: {
+          term: 'pasta',
+          limit: 10,
+          location: 'san jose', //change to another city
+        },
+      });
+      if (res.data) {
+        dispatch({
+          type: HOTELS,
+          payload: res.data.businesses,
+        });
+      } else {
+        console.log('Unable to fetch');
+      }
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Text as BaseText, View} from 'react-native';
 import useThemeColors from '../../../hooks/useThemeColors';
 import styles from './styles';
-
+import {fontFamily as FontStyle} from '../../../../constants/theme';
 const Text = ({
   children,
   isPrimary,
@@ -11,9 +11,11 @@ const Text = ({
   isBold,
   isHeadingTitle,
   isCenter,
+  isItalic,
   hasMargin,
   style,
   leftIcon,
+
   ...rest
 }) => {
   const {primary, secondary, text} = useThemeColors();
@@ -21,6 +23,7 @@ const Text = ({
   let fontSize = 14;
   let marginTop = 0;
   let textAlign;
+  let fontFamily;
   if (isSecondary) {
     color = secondary;
     fontSize = 13;
@@ -41,6 +44,9 @@ const Text = ({
   if (isCenter) {
     textAlign = 'center';
   }
+  if (isItalic) {
+    fontFamily = FontStyle.fontItalic;
+  }
 
   if (hasMargin) {
     marginTop = 10;
@@ -59,6 +65,7 @@ const Text = ({
             fontSize,
             textAlign,
             marginTop,
+            fontFamily,
           },
           style,
         ]}>
