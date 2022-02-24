@@ -5,8 +5,10 @@ import {Container, Text} from './elements';
 import {COLORS, fontFamily} from '../../constants/theme';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {DrawerActions} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
 const Header = ({navigation}) => {
   const {colors} = useTheme();
+  const {cartItems} = useSelector(state => state.cartReducer);
   return (
     <Container style={[styles.container, {backgroundColor: colors.card}]}>
       <Container
@@ -25,14 +27,34 @@ const Header = ({navigation}) => {
           </Text>
         </Container>
       </Container>
-      <TouchableOpacity onPress={() => navigation.navigate('CartScreen')}>
-        <Ionicons
-          name="ios-cart-outline"
-          size={25}
-          color={colors.primary}
-          style={styles.cart}
-        />
-      </TouchableOpacity>
+      <Container style={{backgroundColor: colors.card}}>
+        <TouchableOpacity onPress={() => navigation.navigate('CartScreen')}>
+          <Ionicons
+            name="ios-cart-outline"
+            size={25}
+            color={colors.primary}
+            style={styles.cart}
+          />
+          {cartItems.length > 0 && (
+            <Container
+              style={{
+                backgroundColor: colors.primary,
+                width: 25,
+                height: 25,
+                borderRadius: 12.5,
+                position: 'absolute',
+                alignItems: 'center',
+                justifyContent: 'center',
+                top: -10,
+                left: 10,
+              }}>
+              <Text style={{color: colors.text}} isCenter>
+                {cartItems.length}
+              </Text>
+            </Container>
+          )}
+        </TouchableOpacity>
+      </Container>
     </Container>
   );
 };

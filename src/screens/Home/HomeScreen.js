@@ -67,10 +67,10 @@ const HomeScreen = ({navigation}) => {
             resizeMode="cover">
             <Image
               style={[styles.avatar, {borderColor: colors.text}]}
-              source={{uri: user.image}}
+              source={{uri: user.avatar}}
             />
             <Text style={[styles.h1, {color: colors.text}]}>
-              Good evening {user.firstName}
+              Good evening {user.name}
             </Text>
             <View style={{width: '60%'}}>
               <Text

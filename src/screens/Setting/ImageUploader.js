@@ -62,7 +62,7 @@ const ImageUploader = ({navigation}) => {
         <Image
           style={[styles.image, {borderColor: colors.text}]}
           source={{
-            uri: user.image,
+            uri: user.avatar,
           }}
         />
       </View>

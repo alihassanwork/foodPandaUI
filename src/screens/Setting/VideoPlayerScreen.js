@@ -1,21 +1,32 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, StatusBar, View} from 'react-native';
 import React from 'react';
 import {useTheme} from '@react-navigation/native';
 import VideoPlayer from 'react-native-video-controls';
-const VideoPlayerScreen = ({navigation}) => {
+import {useFocusEffect} from '@react-navigation/native';
+const VideoPlayerScreen = ({navigation, uri}) => {
   const {colors} = useTheme();
-  const textColor = colors.text;
+  useFocusEffect(() => {
+    // This will run when component is `focused` or mounted.
+    StatusBar.setHidden(true);
+
+    // This will run when component is `blured` or unmounted.
+    return () => {
+      StatusBar.setHidden(false);
+    };
+  });
   return (
     <View style={[styles.container, {backgroundColor: colors.background}]}>
-      <Text style={[styles.heading, {color: textColor}]}>VideoPlayerCard</Text>
       <VideoPlayer
         seekColor={colors.primary}
-        onBack={() => navigation.navigate('ImageUploadScreen')}
+        onBack={() => navigation.goBack()}
         controlAnimationTiming={750}
         source={{
           uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
         }} // Can be a URL or a local file.
-        style={{flex: 1}}
+        style={{
+          flex: 1,
+        }}
+        resizeMode={'contain'}
       />
     </View>
   );

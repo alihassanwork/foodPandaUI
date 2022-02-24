@@ -1,6 +1,8 @@
 import {StyleSheet, View, TextInput, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Container, Text} from '../../components/elements';
+import axios from 'axios';
+//react-hook form
 import {useForm, Controller} from 'react-hook-form';
 import {useTheme} from '@react-navigation/native';
 import {COLORS} from '../../../constants/theme';
@@ -16,19 +18,31 @@ const SignInScreen = ({navigation}) => {
     reset,
   } = useForm({
     defaultValues: {
-      firstName: '',
-      lastName: '',
       email: '',
+      password: '',
     },
   });
 
   //redux
   const dispatch = useDispatch();
-  const handleSetUserData = value => dispatch(setUserData(value));
+  const handleSetUserData = async value => {
+    // const email = value.emil;
+    // const password = value.firstName;
+    const response = await axios.post(
+      'https://dyslexia-backend.herokuapp.com/sign-in',
+      {email: value.email, password: value.password},
+    );
+    console.log(response.data);
+    if (response.data.success) {
+      dispatch(setUserData(response.data.user));
+      navigation.goBack();
+    } else {
+      alert(response.data.message);
+    }
+  };
 
   const onSubmit = data => {
     handleSetUserData(data);
-    navigation.navigate('ProfileScreen');
   };
   return (
     <Container style={styles.container}>
@@ -36,105 +50,81 @@ const SignInScreen = ({navigation}) => {
         SignInScreen
       </Text>
       <Container>
-        <Controller
-          control={control}
-          rules={{required: true}}
-          render={({field: {onChange, onBlur, value}}) => (
-            <TextInput
-              style={[
-                styles.input,
-                {
-                  backgroundColor: colors.card,
-                  color: colors.text,
-                  borderWidth: 1,
-                  borderColor: errors.firstName ? 'red' : colors.border,
-                },
-              ]}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              placeholder="Enter First Name"
-              placeholderTextColor={colors.border}
-            />
-          )}
-          name="firstName"
-        />
-
-        {errors.firstName && (
-          <Text isPrimary style={styles.errorStyle}>
-            Required!
-          </Text>
-        )}
-
-        <Controller
-          control={control}
-          rules={{
-            maxLength: 100,
-            required: true,
-          }}
-          render={({field: {onChange, onBlur, value}}) => (
-            <TextInput
-              style={[
-                styles.input,
-                {
-                  backgroundColor: colors.card,
-                  color: colors.text,
-                  borderWidth: 1,
-                  borderColor: errors.lastName ? 'red' : colors.border,
-                },
-              ]}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              placeholder="Enter last Name"
-              placeholderTextColor={colors.border}
-            />
-          )}
-          name="lastName"
-        />
-        {errors.lastName && (
-          <Text isPrimary style={styles.errorStyle}>
-            Required!
-          </Text>
-        )}
-
-        <Controller
-          control={control}
-          rules={{
-            maxLength: 100,
-            required: true,
-          }}
-          render={({field: {onChange, onBlur, value}}) => (
-            <TextInput
-              style={[
-                styles.input,
-                {
-                  backgroundColor: colors.card,
-                  color: colors.text,
-                  borderWidth: 1,
-                  borderColor: errors.email ? 'red' : colors.border,
-                },
-              ]}
-              {...register('email', {
-                pattern: {
-                  value:
-                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                  message: 'Please enter a valid email',
-                },
-              })}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              placeholder="Enter your email"
-              placeholderTextColor={colors.border}
-              autoCapitalize="none"
-            />
-          )}
-          name="email"
-        />
+        <Container style={styles.fieldContainer}>
+          <Controller
+            control={control}
+            rules={{
+              maxLength: 100,
+              required: true,
+            }}
+            render={({field: {onChange, onBlur, value}}) => (
+              <TextInput
+                style={[
+                  styles.input,
+                  {
+                    backgroundColor: colors.card,
+                    color: colors.text,
+                    borderWidth: 1,
+                    borderColor: errors.email ? 'red' : colors.border,
+                  },
+                ]}
+                {...register('email', {
+                  pattern: {
+                    value:
+                      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    message: 'Please enter a valid email',
+                  },
+                })}
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+                placeholder="Enter your email"
+                placeholderTextColor={colors.border}
+                autoCapitalize="none"
+              />
+            )}
+            name="email"
+          />
+        </Container>
         {errors.email && (
           <Text isPrimary style={styles.errorStyle}>
             {errors.email.message ? `${errors.email.message}` : 'Required!'}
+          </Text>
+        )}
+        <Container style={styles.fieldContainer}>
+          <Controller
+            control={control}
+            rules={{
+              required: true,
+            }}
+            {...register('password', {
+              minLength: 8,
+            })}
+            render={({field: {onChange, onBlur, value}}) => (
+              <TextInput
+                style={[
+                  styles.input,
+                  {
+                    backgroundColor: colors.card,
+                    color: colors.text,
+                    borderWidth: 1,
+                    borderColor: errors.password ? 'red' : colors.border,
+                  },
+                ]}
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+                placeholder="Enter your password"
+                placeholderTextColor={colors.border}
+                autoCapitalize="none"
+              />
+            )}
+            name="password"
+          />
+        </Container>
+        {errors.password && (
+          <Text isPrimary style={styles.errorStyle}>
+            Password should 8 characters long
           </Text>
         )}
         <View style={styles.btnContainer}>
@@ -165,8 +155,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   input: {
-    marginHorizontal: 20,
-    marginTop: 20,
+    width: '90%',
     borderRadius: 10,
     paddingLeft: 10,
     borderWidth: 1,
@@ -184,5 +173,10 @@ const styles = StyleSheet.create({
     margin: 20,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
+  },
+  fieldContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
   },
 });
