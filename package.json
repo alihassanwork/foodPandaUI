@@ -11,6 +11,7 @@
     "debug": "open 'rndebugger://set-debugger-loc?host=localhost&port=8081’"
   },
   "dependencies": {
+    "@react-native-community/slider": "^4.2.0",
     "@react-native-firebase/app": "^14.5.0",
     "@react-native-firebase/firestore": "^14.5.0",
     "@react-native-firebase/messaging": "^14.5.0",
@@ -28,6 +29,7 @@
     "react-native-reanimated": "^2.3.1",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.2",
+    "react-native-track-player": "^2.1.2",
     "react-native-vector-icons": "^9.0.0",
     "react-native-video": "^5.2.0",
     "react-native-video-controls": "^2.8.1",

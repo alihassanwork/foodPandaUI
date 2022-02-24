@@ -4,6 +4,7 @@ const Stack = createNativeStackNavigator();
 import SettingScreen from '../../screens/Setting/SettingScreen';
 import ImageUploader from '../../screens/Setting/ImageUploader';
 import VideoPlayerScreen from '../../screens/Setting/VideoPlayerScreen';
+import MusicPlayer from '../../screens/Setting/MusicPlayer';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 
 const SettingStack = ({navigation, route}) => {
@@ -23,6 +24,11 @@ const SettingStack = ({navigation, route}) => {
       <Stack.Screen
         name="VideoPlayerScreen"
         component={VideoPlayerScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="MusicPlayerScreen"
+        component={MusicPlayer}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

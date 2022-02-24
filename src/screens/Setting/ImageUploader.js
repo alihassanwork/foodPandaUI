@@ -94,6 +94,18 @@ const ImageUploader = ({navigation}) => {
           </Text>
         </TouchableOpacity>
       </View>
+      <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('MusicPlayerScreen')}
+          style={[
+            styles.selectImage,
+            {backgroundColor: colors.text, width: '60%'},
+          ]}>
+          <Text style={[styles.heading, {color: colors.background}]}>
+            Go To Music Player
+          </Text>
+        </TouchableOpacity>
+      </View>
     </Container>
   );
 };
