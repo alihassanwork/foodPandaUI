@@ -31,8 +31,9 @@ const tracks = [
     id: 5,
     title: 'Crimson Fly',
     artist: 'Huma-Huma',
-    artwork: 'https://picsum.photos/200/300',
-    url: 'https://www.chosic.com/wp-content/uploads/2021/07/The-Epic-Hero-Epic-Cinematic-Keys-of-Moon-Music.mp3',
+    artwork:
+      'https://www.freepnglogos.com/uploads/apple-music-logo-circle-png-28.png',
+    url: 'content://com.android.externalstorage.documents/document/primary%3ADownload%2FSongs%2Fy2mate.com%20-%20Har%20Funn%20Maula%20Video%20Song%20Koi%20Jaane%20Na%20%20Aamir%20Khan%20%20Elli%20A%20%20Vishal%20D%20Zara%20K%20Tanishk%20B%20Amitabh%20B.mp3',
   },
 ];
 

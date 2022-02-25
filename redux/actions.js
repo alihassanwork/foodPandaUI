@@ -7,6 +7,7 @@ export const REMOVE_FAVORITE_ITEM = 'REMOVE_FAVORITE_ITEM';
 export const USER_PROFILE_IMAGE = 'USER_PROFILE_IMAGE';
 export const USER_DATA = 'USER_DATA';
 export const HOTELS = 'HOTELS';
+export const TRACKS_LIST = 'TRACKS_LIST';
 
 // Construct a BASE URL for API endpoint
 const API_URL = 'https://api.themoviedb.org/3/movie/popular';
@@ -64,6 +65,18 @@ export const setUserData = userInfo => dispatch => {
   });
 };
 
+// add array of objects songs detail
+export const setTracks = tracks => dispatch => {
+  console.log('dispatch songs actions===>', tracks);
+  tracks.forEach((item, i) => {
+    item.id = i + 1;
+  });
+  console.log('id added===>', tracks);
+  dispatch({
+    type: TRACKS_LIST,
+    payload: tracks,
+  });
+};
 export const getHotels = () => {
   try {
     return async dispatch => {

@@ -11,7 +11,7 @@ import {HotelDetail, FoodDelivery} from '../../screens/Home/FoodDelivery';
 const Stack = createNativeStackNavigator();
 const HomeStack = ({navigation, route}) => {
   const {colors} = useTheme();
-  const tabHiddenRoutes = ['MovieDetail', 'VideoPlayerScreen'];
+  const tabHiddenRoutes = ['MovieDetail'];
   React.useLayoutEffect(() => {
     if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))) {
       navigation.setOptions({tabBarStyle: {display: 'none'}});

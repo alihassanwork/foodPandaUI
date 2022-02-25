@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   SafeAreaView,
   Dimensions,
@@ -9,12 +8,10 @@ import {
   Image,
   Animated,
 } from 'react-native';
-// import  'react-native-track-player';
 
 import TrackPlayer, {
   Capability,
   Event,
-  RepeatMode,
   State,
   usePlaybackState,
   useProgress,
@@ -22,10 +19,18 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 import Slider from '@react-native-community/slider';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import tracks from '../../../utils/tracks';
 import {COLORS} from '../../../../constants/theme';
 const {width, height} = Dimensions.get('window');
+import {useSelector, useDispatch} from 'react-redux';
+import DocumentPicker, {
+  isInProgress,
+  types,
+} from 'react-native-document-picker';
+import {setTracks} from '../../../../redux/actions';
+
+import {Container, Text} from '../../../components/elements';
+
 // react-native-track-player setUp player
 const setupPlayer = async () => {
   try {
@@ -62,6 +67,10 @@ const togglePlayBack = async playBackState => {
 const MusicPlayer = () => {
   const playBackState = usePlaybackState();
   const progress = useProgress();
+  //redux
+  const dispatch = useDispatch();
+  const {songs} = useSelector(state => state.userReducer);
+  const handleSetTracks = value => dispatch(setTracks(value));
   //   custom states
   const [songIndex, setsongIndex] = useState(0);
   const [repeatMode, setRepeatMode] = useState('off');
@@ -82,37 +91,6 @@ const MusicPlayer = () => {
       setTrackArtwork(artwork);
     }
   });
-  // repeatIcons setup
-  const repeatIcon = () => {
-    if (repeatMode == 'off') {
-      return 'repeat-off';
-    }
-
-    if (repeatMode == 'track') {
-      return 'repeat-once';
-    }
-
-    if (repeatMode == 'repeat') {
-      return 'repeat';
-    }
-  };
-
-  const changeRepeatMode = () => {
-    if (repeatMode == 'off') {
-      TrackPlayer.setRepeatMode(RepeatMode.Track);
-      setRepeatMode('track');
-    }
-
-    if (repeatMode == 'track') {
-      TrackPlayer.setRepeatMode(RepeatMode.Queue);
-      setRepeatMode('repeat');
-    }
-
-    if (repeatMode == 'repeat') {
-      TrackPlayer.setRepeatMode(RepeatMode.Off);
-      setRepeatMode('off');
-    }
-  };
 
   const skipTo = async trackId => {
     console.log('track id===>', trackId);
@@ -139,6 +117,19 @@ const MusicPlayer = () => {
     };
   }, []);
 
+  // handle file picker error
+  const handleError = err => {
+    if (DocumentPicker.isCancel(err)) {
+      console.warn('cancelled');
+      // User cancelled the picker, exit any dialogs or menus and move on
+    } else if (isInProgress(err)) {
+      console.warn(
+        'multiple pickers were opened, only the last will be considered',
+      );
+    } else {
+      throw err;
+    }
+  };
   const skipToNext = () => {
     console.log('skip to next before index==>', songIndex);
     setsongIndex(songIndex < tracks.length - 1 ? songIndex + 1 : 0);
@@ -155,11 +146,25 @@ const MusicPlayer = () => {
     });
     setsongIndex(songIndex > 0 ? songIndex - 1 : 0);
   };
+  console.log(
+    'progress.progress===>',
+    Math.round((progress.buffered / progress.duration) * 100),
+  );
+  const bufferedPercentage = Math.round(
+    (progress.buffered / progress.duration) * 100,
+  );
 
+  // pick files audio
+  console.log('redux songs state===> ', songs);
   const renderSongs = ({item, index}) => {
     return (
       <Animated.View style={style.mainWrapper}>
-        <View style={[style.imageWrapper, style.elevation]}>
+        <View
+          style={[
+            style.imageWrapper,
+            style.elevation,
+            {transform: [{rotate: `${progress.position * 5}deg`}]},
+          ]}>
           <Image
             //   source={item.artwork}
             source={{uri: trackArtwork}}
@@ -172,9 +177,23 @@ const MusicPlayer = () => {
   return (
     <SafeAreaView style={style.container}>
       {/* music player section */}
+      <Container style={style.folderContainer}>
+        <TouchableOpacity
+          style={style.folderContainerItem}
+          onPress={() => {
+            DocumentPicker.pick({
+              allowMultiSelection: true,
+              type: [types.audio],
+            })
+              .then(pick => handleSetTracks(pick))
+              .catch(handleError);
+          }}>
+          <Ionicons name="ios-musical-notes-sharp" size={35} color="blue" />
+        </TouchableOpacity>
+      </Container>
+
       <View style={style.mainContainer}>
         {/* Image */}
-
         <Animated.FlatList
           ref={songSlider}
           renderItem={renderSongs}
@@ -220,6 +239,20 @@ const MusicPlayer = () => {
               await TrackPlayer.seekTo(value);
             }}
           />
+          <View
+            style={{
+              position: 'absolute',
+              backgroundColor: '#FFFF',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: isNaN(bufferedPercentage)
+                ? 0
+                : (bufferedPercentage / 100) * 325,
+              height: 1,
+              top: 44,
+              left: 16,
+              borderRadius: 10,
+            }}></View>
 
           {/* Progress Durations */}
           <View style={style.progressLevelDuraiton}>
@@ -267,31 +300,6 @@ const MusicPlayer = () => {
           </TouchableOpacity>
         </View>
       </View>
-
-      {/* bottom section */}
-      <View style={style.bottomSection}>
-        <View style={style.bottomIconContainer}>
-          <TouchableOpacity onPress={() => {}}>
-            <Ionicons name="heart-outline" size={30} color="#888888" />
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={changeRepeatMode}>
-            <MaterialCommunityIcons
-              name={`${repeatIcon()}`}
-              size={30}
-              color={repeatMode !== 'off' ? COLORS.primary : '#888888'}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => {}}>
-            <Ionicons name="share-outline" size={30} color="#888888" />
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => {}}>
-            <Ionicons name="ellipsis-horizontal" size={30} color="#888888" />
-          </TouchableOpacity>
-        </View>
-      </View>
     </SafeAreaView>
   );
 };
@@ -302,46 +310,51 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#222831',
+    borderTopLeftRadius: 25,
+
+    borderTopRightRadius: 25,
+  },
+  folderContainer: {
+    width: '100%',
+    height: 50,
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    paddingHorizontal: 20,
+    backgroundColor: '#222831',
+  },
+  folderContainerItem: {
+    width: 70,
+    height: 50,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   mainContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  bottomSection: {
-    borderTopColor: '#393E46',
-    borderWidth: 1,
-    width: width,
-    alignItems: 'center',
-    paddingVertical: 15,
-  },
-
-  bottomIconContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '80%',
-  },
 
   mainWrapper: {
     width: width,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 25,
   },
 
   imageWrapper: {
-    width: 300,
-    height: 340,
-    marginBottom: 25,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
   },
   musicImage: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 15,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
   },
   elevation: {
     elevation: 5,
-
     shadowColor: '#ccc',
     shadowOffset: {
       width: 5,
@@ -369,6 +382,7 @@ const style = StyleSheet.create({
     height: 40,
     marginTop: 25,
     flexDirection: 'row',
+    zIndex: 10,
   },
   progressLevelDuraiton: {
     width: 340,
@@ -385,5 +399,6 @@ const style = StyleSheet.create({
     alignItems: 'center',
     marginTop: 15,
     width: '60%',
+    marginBottom: 30,
   },
 });

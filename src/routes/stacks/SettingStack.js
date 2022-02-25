@@ -8,7 +8,7 @@ import MusicPlayer from '../../screens/Setting/MusicPlayer';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 
 const SettingStack = ({navigation, route}) => {
-  const tabHiddenRoutes = ['VideoPlayerScreen'];
+  const tabHiddenRoutes = ['VideoPlayerScreen', 'MusicPlayerScreen'];
   React.useLayoutEffect(() => {
     if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))) {
       navigation.setOptions({tabBarStyle: {display: 'none'}});
